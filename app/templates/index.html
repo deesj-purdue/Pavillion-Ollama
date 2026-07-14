@@ -452,7 +452,9 @@
             modelSel.appendChild(opt);
           });
         }
-      } catch (_) {}
+      } catch (_) {
+        // Model list refresh is best-effort; silently skip if Ollama isn't ready yet
+      }
     }
 
     refreshModels();
