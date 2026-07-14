@@ -7,6 +7,10 @@ app = Flask(__name__)
 
 OLLAMA_BASE_URL = os.environ.get("OLLAMA_BASE_URL", "http://localhost:11434")
 DEFAULT_MODEL = os.environ.get("DEFAULT_MODEL", "llama3.2")
+SYSTEM_PROMPT = os.environ.get(
+    "SYSTEM_PROMPT",
+    "You are a helpful assistant. Keep your answers short and concise. Avoid unnecessary elaboration.",
+)
 
 
 def get_models():
@@ -35,6 +39,9 @@ def chat():
     body = request.get_json(force=True)
     model = body.get("model", DEFAULT_MODEL)
     messages = body.get("messages", [])
+
+    if SYSTEM_PROMPT.strip() and not any(m.get("role") == "system" for m in messages):
+        messages = [{"role": "system", "content": SYSTEM_PROMPT}] + messages
 
     payload = {
         "model": model,

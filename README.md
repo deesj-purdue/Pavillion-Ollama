@@ -42,6 +42,7 @@ docker exec pavillion-ollama ollama pull llama3.2
 |---|---|---|
 | `WEB_PORT` | `5000` | Host port for the web UI |
 | `DEFAULT_MODEL` | `llama3.2` | Model pre-selected in the dropdown |
+| `SYSTEM_PROMPT` | `You are a helpful assistant. Keep your answers short and concise. Avoid unnecessary elaboration.` | System message prepended to every conversation. Set to an empty string to disable. |
 
 ## Pulling Models
 
